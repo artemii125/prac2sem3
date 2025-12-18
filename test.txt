@@ -1,0 +1,29 @@
+INSERT INTO Type VALUES ('Tramvai')
+INSERT INTO Type VALUES ('Avtobus')
+INSERT INTO Type VALUES ('Metro')
+
+INSERT INTO System VALUES ('1', '13', 'Center-Park')
+INSERT INTO System VALUES ('2', '5', 'Vokzal-Rynok')
+INSERT INTO System VALUES ('3', 'L1', 'Marksa-Lenina')
+
+#вывод всего
+SELECT Type.name, System.number, System.route FROM Type, System WHERE System.ID = Type.Type_pk
+
+#вывод трамвай
+SELECT Type.name, System.number, System.route FROM Type, System WHERE System.ID = Type.Type_pk AND Type.name = 'Tramvai'
+
+#декартово произведение
+SELECT Type.name, System.number, System.route FROM Type, System WHERE System.ID = '1' OR System.ID = '4'
+
+//SELECT Type.name, System.number, System.route FROM Type, System WHERE System.ID = Type.Type_pk AND (System.ID = '1' OR System.ID = '4')
+//SELECT Type.name, System.number, System.route FROM Type, System WHERE System.ID = Type.Type_pk AND System.ID = '1' OR System.ID = Type.Type_pk AND System.ID = '4'
+
+#рабочая для оператр OR (без декарт)
+SELECT Type.name, System.number, System.route FROM Type, System WHERE System.ID = '1' OR System.ID = '4' AND System.ID = Type.Type_pk //тк 1 часть - результат id=1 истина, не смотрим на второе условие и выводим, проверив связть, потом 2 часть 1 усл нет, второе да вывод после проверки
+
+#удаление объекта по 6 ID
+DELETE FROM Type WHERE Type.Type_pk = '2'
+
+#примечания
+System.ID = Type.Type_pk - в самый конец всегда, тк общие ограничивающие условия
+без этого ппоисходит декртово произведение (cross join) без условия программа работает как перемножатель

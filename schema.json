@@ -1,0 +1,8 @@
+{
+  "name": "TransportSystem",
+  "tuples_limit": 100,
+  "structure": {
+    "Type": ["name"],
+    "System": ["ID", "number", "route"]
+  }
+}
