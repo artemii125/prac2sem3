@@ -2,7 +2,7 @@ INSERT INTO Type VALUES ('Tramvai')
 INSERT INTO Type VALUES ('Avtobus')
 INSERT INTO Type VALUES ('Metro')
 
-INSERT INTO System VALUES ('1', '13', 'Center-Park')
+INSERT INTO System VALUES ('1', '26', 'Center-Park')
 INSERT INTO System VALUES ('2', '5', 'Vokzal-Rynok')
 INSERT INTO System VALUES ('3', 'L1', 'Marksa-Lenina')
 
@@ -27,3 +27,7 @@ DELETE FROM Type WHERE Type.Type_pk = '2'
 #примечания
 System.ID = Type.Type_pk - в самый конец всегда, тк общие ограничивающие условия
 без этого ппоисходит декртово произведение (cross join) без условия программа работает как перемножатель
+
+#проверка на работу сервера
+kill -9 DBrun
+ss -tuln | grep 7432

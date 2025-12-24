@@ -1,7 +1,7 @@
 # Указываем компилятор и флаги
 CXX = g++
 # Добавляем -Iinclude, чтобы можно было писать #include "dbase/Schema.h"
-CXXFLAGS = -std=c++17 -Wall -Wextra -Iinclude
+CXXFLAGS = -std=c++17 -Wall -Wextra -Iinclude -pthread
 
 # Имя исполнимого файла
 TARGET = DBrun

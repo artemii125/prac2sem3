@@ -133,7 +133,7 @@ void SQLProcessor::processInsert(const string& query) {
 }
 
 void SQLProcessor::processDelete(const string& query) {
-    // DELETE FROM table WHERE col = 'val'
+    //DELETE FROM table WHERE col = 'val'
     Massive tokens = split(query, ' ');
     if (tokens.Length() < 3) return;
 
@@ -163,11 +163,19 @@ void SQLProcessor::processDelete(const string& query) {
 void SQLProcessor::processSelect(const string& query) {
     size_t fromPos = query.find("FROM");
     size_t wherePos = query.find("WHERE");
+    size_t selectPos = query.find("SELECT");
+    string selectPart = query.substr(selectPos + 6, fromPos - (selectPos + 6));
+    if (trim(selectPart) == "*") {
+        cout << "Error: SELECT * is not allowed. Specify columns explicitly" << endl;
+        return;
+    }
+    if (wherePos == string::npos) {
+        cout << "Error: SELECT without WHERE is not allowed" << endl;
+        return;
+    }
     
     //получаем названия таблиц
-    string fromPart = (wherePos == string::npos) 
-        ? query.substr(fromPos + 4) 
-        : query.substr(fromPos + 4, wherePos - (fromPos + 4));
+    string fromPart = query.substr(fromPos + 4, wherePos - (fromPos + 4));
     
     Massive tablesRaw = split(fromPart, ',');
     string tables[10];
