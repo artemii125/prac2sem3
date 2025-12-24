@@ -1,19 +1,18 @@
-# Указываем компилятор и флаги
+# Kомпилятор и флаги
 CXX = g++
-# Добавляем -Iinclude, чтобы можно было писать #include "dbase/Schema.h"
 CXXFLAGS = -std=c++17 -Wall -Wextra -Iinclude -pthread
 
 # Имя исполнимого файла
 TARGET = DBrun
 
-# Где искать исходники
+# Исходники
 SRC_DIR = src
 
 SOURCES = $(wildcard $(SRC_DIR)/*.cpp) \
           $(wildcard $(SRC_DIR)/db/*.cpp) \
           $(wildcard $(SRC_DIR)/ADT/*.cpp)
 
-# Список объектных файлов (будут создаваться рядом с исходниками)
+# Список объектных файлов
 OBJECTS = $(SOURCES:.cpp=.o)
 
 # Правило сборки итогового файла
